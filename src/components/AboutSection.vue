@@ -16,7 +16,7 @@ const about = site.about
           <div class="overflow-hidden rounded-3xl shadow-2xl">
             <img
               :src="about.image"
-              alt="A guide looking out over the northern New Mexico high country"
+              alt="Adobe architecture against the mountains near Taos, New Mexico"
               class="h-[420px] w-full object-cover"
               loading="lazy"
             />
