@@ -4,7 +4,10 @@ import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  // GitHub Pages serves this project site under /sangre-summits/.
+  // Dev (`vite serve`) stays at root so localhost works normally.
+  base: command === 'build' ? '/sangre-summits/' : '/',
   plugins: [
     vue(),
     // Auto-imports Vuetify components/directives and treeshakes the bundle.
@@ -18,4 +21,4 @@ export default defineConfig({
   server: {
     port: 5173,
   },
-})
+}))

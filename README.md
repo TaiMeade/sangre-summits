@@ -78,6 +78,29 @@ The form sends these fields — reference them in your EmailJS template as
 > key intended for client-side use; restrict allowed domains in your EmailJS
 > dashboard for production.
 
+## Deployment (GitHub Pages)
+
+The site auto-deploys to GitHub Pages via GitHub Actions
+(`.github/workflows/deploy.yml`) on every push to `main`.
+
+Live URL: **https://taimeade.github.io/sangre-summits/**
+
+One-time setup in the GitHub repo:
+
+1. **Settings → Pages → Build and deployment → Source: "GitHub Actions".**
+2. (Optional, to enable the contact form in production) **Settings → Secrets
+   and variables → Actions → New repository secret** — add:
+   - `VITE_EMAILJS_SERVICE_ID`
+   - `VITE_EMAILJS_TEMPLATE_ID`
+   - `VITE_EMAILJS_PUBLIC_KEY`
+
+   The workflow injects these at build time. Without them the form still works
+   but shows the "reach us directly" notice.
+
+The Vite `base` is set to `/sangre-summits/` for production builds (see
+`vite.config.js`) so assets resolve correctly under the project-site subpath.
+If you later serve from a custom domain or a different repo name, update `base`.
+
 ## Project structure
 
 ```
