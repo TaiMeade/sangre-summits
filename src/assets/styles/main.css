@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   Base typography & smooth scrolling
+   (Tailwind preflight is disabled, so we set the essentials ourselves and let
+   Vuetify own the broader reset.)
+--------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  /* offset anchor targets so the fixed navbar doesn't cover section headings */
+  scroll-padding-top: 72px;
+}
+
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-display {
+  font-family: 'Sora', ui-sans-serif, system-ui, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Reusable utility layers
+--------------------------------------------------------------------------- */
+@layer components {
+  .section-shell {
+    @apply mx-auto w-full max-w-content px-6 sm:px-8 lg:px-10;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-turquoise;
+  }
+
+  .section-heading {
+    @apply font-display text-3xl font-bold leading-tight text-mountain sm:text-4xl lg:text-5xl;
+  }
+}
+
+/* Scroll-reveal: elements start hidden, then fade up when .is-visible is added
+   by the useScrollReveal composable. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Topographic contour texture used behind some sections */
+.topo-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%231D2D44' stroke-opacity='0.05' stroke-width='1.2'%3E%3Cpath d='M-20 80 Q 40 20 80 80 T 180 80'/%3E%3Cpath d='M-20 100 Q 40 40 80 100 T 180 100'/%3E%3Cpath d='M-20 120 Q 40 60 80 120 T 180 120'/%3E%3Cpath d='M-20 60 Q 40 0 80 60 T 180 60'/%3E%3Cpath d='M-20 40 Q 40 -20 80 40 T 180 40'/%3E%3C/g%3E%3C/svg%3E");
+}
