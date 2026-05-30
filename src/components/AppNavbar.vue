@@ -40,7 +40,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
     :color="scrolled ? 'background' : 'transparent'"
     :theme="scrolled ? 'sangreTheme' : 'dark'"
     height="72"
-    class="transition-colors duration-300"
+    :class="['transition-colors duration-300', { 'navbar-scrim': !scrolled }]"
     flat
     fixed
   >
@@ -114,3 +114,28 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
     </template>
   </v-navigation-drawer>
 </template>
+
+<style scoped>
+/* At the top of the page the bar is transparent over the hero photo. A bright
+   sky/snow area behind it leaves the white text and logo with almost no
+   contrast, so we lay a soft top-down scrim behind the bar (background-color
+   stays transparent — this only sets background-image) and give the text and
+   icons a subtle shadow. Both fade away once `scrolled` swaps in a solid bar. */
+.navbar-scrim {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(13, 20, 34, 0.6) 0%,
+    rgba(13, 20, 34, 0.28) 55%,
+    rgba(13, 20, 34, 0) 100%
+  ) !important;
+}
+
+.navbar-scrim .font-display,
+.navbar-scrim :deep(.v-btn__content) {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+.navbar-scrim :deep(.v-icon) {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
+}
+</style>
